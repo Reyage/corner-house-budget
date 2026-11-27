@@ -16,6 +16,9 @@ import { buildDossier } from './vendor/makefun-frontend.ts';
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
+if (!existsSync(join(here, 'app', 'index.html'))) {
+  throw new Error('app/index.html is missing next to main.ts');
+}
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
